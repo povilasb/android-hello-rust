@@ -1,0 +1,11 @@
+[target.aarch64-linux-android]
+ar = "/opt/android-sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android23-ar"
+linker = "/opt/android-sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android23-clang"
+
+[target.armv7-linux-androideabi]
+ar = "/root/src/android-hello-rust/NDK/arm/bin/arm-linux-androideabi-ar"
+linker = "/root/src/android-hello-rust/NDK/arm/bin/arm-linux-androideabi-clang"
+
+[target.x86_64-linux-android]
+ar = "/root/src/android-hello-rust/NDK/x86/bin/x86_64-linux-android-ar"
+linker = "/root/src/android-hello-rust/NDK/x86/bin/x86_64-linux-android-clang"
