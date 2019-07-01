@@ -6,7 +6,7 @@ docker-image:
 
 .PHONY: run-docker
 run-docker:
-	docker run \
+	docker run --privileged \
 		-v $(CURDIR):/root/src -w /root/src \
 		-v /dev/bus/usb:/dev/bus/usb \
 		-it $(docker_image) bash

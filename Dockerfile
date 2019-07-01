@@ -18,5 +18,7 @@ RUN $rustup target add aarch64-linux-android     # for arm64
 RUN $rustup target add x86_64-linux-android      # for x86_64
 
 RUN mkdir /root/src
+# Initialized gradle which installs other tools like adb as well
+RUN cd /root/src/hellorust && ./gradlew
 
 COPY cargo_config.toml /root/.cargo/config
