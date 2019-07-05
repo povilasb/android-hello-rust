@@ -4,8 +4,10 @@ use jni::JNIEnv;
 use std::ffi::{CStr, CString};
 use unwrap::unwrap;
 
+// NOTE: _1 is a special escape sequence so that Java would treat it a an underscore rather than
+// dot. See: https://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/design.html#resolving_native_method_names
 #[no_mangle]
-pub unsafe extern "C" fn Java_com_example_android_MainActivity_hello(
+pub unsafe extern "C" fn Java_com_example_hello_1rust_MainActivity_hello(
     env: JNIEnv,
     _: JObject,
     j_recipient: JString,
