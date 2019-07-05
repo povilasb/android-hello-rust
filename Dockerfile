@@ -3,6 +3,9 @@ FROM thyrlian/android-sdk
 RUN echo y | sdkmanager "ndk-bundle"
 ENV NDK=$ANDROID_HOME/ndk-bundle
 
+RUN mkdir /opt/android-ndk
+RUN ${NDK}/build/tools/make_standalone_toolchain.py --api 26 --arch arm --install-dir /opt/android-ndk/arm
+
 RUN apt update
 RUN DEBIAN_FRONTEND=noninteractive apt install -y curl gcc pkg-config libssl-dev
 
@@ -18,7 +21,5 @@ RUN $rustup target add aarch64-linux-android     # for arm64
 RUN $rustup target add x86_64-linux-android      # for x86_64
 
 RUN mkdir /root/src
-# Initialized gradle which installs other tools like adb as well
-RUN cd /root/src/hellorust && ./gradlew
 
-COPY cargo_config.toml /root/.cargo/config
+COPY libhello/cargo_config.toml /root/.cargo/config
