@@ -5,3 +5,9 @@ authors = ["Povilas Balciunas <balciunas90@gmail.com>"]
 edition = "2018"
 
 [dependencies]
+jni = "0.12.3"
+unwrap = "1.2.1"
+
+[lib]
+name = "hello_rust"
+crate-type = ["cdylib"]

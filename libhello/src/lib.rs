@@ -1,14 +1,19 @@
-use std::os::raw::{c_char};
-use std::ffi::{CString, CStr};
-
+use jni::objects::{JObject, JString};
+use jni::sys::jstring;
+use jni::JNIEnv;
+use std::ffi::{CStr, CString};
+use unwrap::unwrap;
 
 #[no_mangle]
-pub extern fn rust_say_hello(to: *const c_char) -> *mut c_char {
-    let c_str = unsafe { CStr::from_ptr(to) };
-    let recipient = match c_str.to_str() {
-        Err(_) => "there",
-        Ok(string) => string,
-    };
+pub unsafe extern "C" fn Java_com_example_android_MainActivity_hello(
+    env: JNIEnv,
+    _: JObject,
+    j_recipient: JString,
+) -> jstring {
+    let recipient = CString::from(CStr::from_ptr(
+        unwrap!(env.get_string(j_recipient)).as_ptr(),
+    ));
 
-    CString::new("Hello ".to_owned() + recipient).unwrap().into_raw()
+    let res = unwrap!(env.new_string("Hello ".to_owned() + unwrap!(recipient.to_str())));
+    res.into_inner()
 }
